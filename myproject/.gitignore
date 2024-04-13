@@ -1,5 +1,12 @@
 # Virtual environment
 env/
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
 
 # Installed dependencies 
 /bin/
@@ -12,3 +19,14 @@ env/
 # Python cache files
 __pycache__/
 *.pyc
+
+
+# Django stuff:
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+
+
+
+
