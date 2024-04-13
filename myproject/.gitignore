@@ -1,0 +1,14 @@
+# Virtual environment
+env/
+
+# Installed dependencies 
+/bin/
+/include/
+/lib/
+/lib64/
+/Scripts/
+/share/
+
+# Python cache files
+__pycache__/
+*.pyc
