@@ -5,6 +5,8 @@ from django.core.mail import send_mail
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth.decorators import login_required
+
 
 from .forms import DeviceIssueForm
 
@@ -41,13 +43,16 @@ def logout_view(request):
     logout(request)
     return redirect('login')
 
+@login_required
+def profile(request):
+    return render(request, 'profile.html')
+
 def device_issue_form(request):
     if request.method == 'POST':
         form = DeviceIssueForm(request.POST)
         if form.is_valid():
-            device_issue = form.save()
-            send_email_to_company(device_issue)
-            return render(request, 'success.html')
+            device_issue = form.save()  
+            return redirect('home')  
     else:
         form = DeviceIssueForm()
     return render(request, 'device_issue_form.html', {'form': form})
