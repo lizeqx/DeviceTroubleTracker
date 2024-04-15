@@ -1,111 +1,81 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Device Trouble Tracker - Dashboard</title>
-    <style>
-        /* Reset styles */
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
-        }
-        /* Header styles */
-        header {
-            background-color: #333;
-            color: #fff;
-            padding: 10px 0;
-        }
-        header nav ul {
-            margin: 0;
-            padding: 0;
-            list-style-type: none;
-        }
-        header nav ul li {
-            display: inline;
-            margin-right: 20px;
-        }
-        /* Container styles */
-        .container {
-            max-width: 800px;
-            margin: 20px auto;
-            padding: 20px;
-            background-color: #fff;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            text-align: center;
-        }
-        /* Heading styles */
-        h1 {
-            color: #333;
-            margin-bottom: 20px;
-        }
-        h2 {
-            color: #666;
-            margin-top: 30px;
-        }
-        /* Device list styles */
-        .device-list {
-            margin-top: 30px;
-        }
-        .device-list ul {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-            text-align: left;
-        }
-        .device-list li {
-            margin-bottom: 10px;
-        }
-        /* Recent issues styles */
-        .recent-issues {
-            margin-top: 30px;
-        }
-        .recent-issues ul {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-            text-align: left;
-        }
-        .recent-issues li {
-            margin-bottom: 10px;
-        }
-    </style>
-</head>
-<body>
-    <header>
-        <nav>
-            <ul>
-                <li><a href="{% url 'home' %}">Home</a></li>
-                <li><a href="{% url 'logout' %}">Logout</a></li>
-            </ul>
-        </nav>
-    </header>
-    <div class="container">
-        <h1>Dashboard</h1>
-        <div class="device-list">
-            <h2>Your Devices</h2>
-            <ul>
-                {% for device in user.devices %}
-                <li>{{ device.name }}</li>
-                {% endfor %}
-            </ul>
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="slideshow-container">
+    <div class="mySlides fade">
+        <div class="numbertext">1 / 3</div>
+        <img src="path/to/img_nature_wide.jpg" style="width:100%">
+        <div class="text">Caption Text</div>
+    </div>
+
+    <div class="mySlides fade">
+        <div class="numbertext">2 / 3</div>
+        <img src="path/to/img_snow_wide.jpg" style="width:100%">
+        <div class="text">Caption Two</div>
+    </div>
+
+    <div class="mySlides fade">
+        <div class="numbertext">3 / 3</div>
+        <img src="path/to/img_mountains_wide.jpg" style="width:100%">
+        <div class="text">Caption Three</div>
+    </div>
+
+    <a class="prev" onclick="plusSlides(-1)">❮</a>
+    <a class="next" onclick="plusSlides(1)">❯</a>
+</div>
+<br>
+
+<div style="text-align:center">
+    <span class="dot" onclick="currentSlide(1)"></span> 
+    <span class="dot" onclick="currentSlide(2)"></span> 
+    <span class="dot" onclick="currentSlide(3)"></span> 
+</div>
+<div class="container">
+    <div class="header">
+        <h1>Welcome to Device Trouble Tracker</h1>
+        <p>This is the homepage of our application. Report your device issues here.</p>
+        <a href="{% url 'device_issue_form' %}" class="cta-button">Report Device Issue</a>
+    </div>
+    <div class="features">
+        <div class="feature">
+            <img src="path/to/feature1.png" alt="Feature 1">
+            <h2>Feature 1</h2>
+            <p>Description of feature 1.</p>
         </div>
-        <div class="recent-issues">
-            <h2>Recent Issues</h2>
-            <ul>
-                {% for issue in recent_issues %}
-                <li>{{ issue }}</li>
-                {% endfor %}
-            </ul>
+        <div class="feature">
+            <img src="path/to/feature2.png" alt="Feature 2">
+            <h2>Feature 2</h2>
+            <p>Description of feature 2.</p>
         </div>
     </div>
-</body>
-</html>
+</div>
+{% endblock %}
+
+<script>
+let slideIndex = 1;
+showSlides(slideIndex);
+
+function plusSlides(n) {
+    showSlides(slideIndex += n);
+}
+
+function currentSlide(n) {
+    showSlides(slideIndex = n);
+}
+
+function showSlides(n) {
+    let i;
+    let slides = document.getElementsByClassName("mySlides");
+    let dots = document.getElementsByClassName("dot");
+    if (n > slides.length) {slideIndex = 1}    
+    if (n < 1) {slideIndex = slides.length}
+    for (i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";  
+    }
+    for (i = 0; i < dots.length; i++) {
+        dots[i].className = dots[i].className.replace(" active", "");
+    }
+    slides[slideIndex-1].style.display = "block";  
+    dots[slideIndex-1].className += " active";
+}
+</script>
